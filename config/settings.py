@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test',
-        'USER': 'postgres',
+        'NAME': os.environ.get('NAME_PSQL'),
+        'USER': os.environ.get('USERNAME_PSQL'),
         'HOST': '127.0.0.1',
         'PORT': 5432,
-        'PASSWORD': '1234'
+        'PASSWORD': os.environ.get('PASSWORD_PSQL')
     }
 }
 
@@ -122,6 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = (
+        BASE_DIR / 'static',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

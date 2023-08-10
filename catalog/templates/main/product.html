@@ -1,0 +1,79 @@
+{% extends 'main/base.html'%}
+{% block content %}
+<div class="container">
+
+
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        {% for object in object_list %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-{{ object.name }}" aria-expanded="false"
+                        aria-controls="flush-{{ object.name }}">
+                    {{ object.name }}
+                </button>
+            </h2>
+            <div id="flush-{{ object.name }}" class="accordion-collapse collapse"
+                 data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">{{ object.category }} <p class="text">{{object.description}}</p>
+                    <p class="text">
+                    <h3>${{object.price}}</h3></p> <p class="text"><h6>
+                        {{object.create_date}}</h6></p> <p class="text"><h6>
+                        {{object.date_of_change}}</h6></p> </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <div class="m-3">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Добавить продукт
+        </button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Продукт</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="" class="form-floating">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name">Имя</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Название"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Описание</label>
+                            <textarea type="text" name="description" class="form-control" id="description"
+                                      placeholder="Описание" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category">Категория</label>
+                            <input type="text" name="category" class="form-control" id="category"
+                                   placeholder="Категория" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price">Цена</label>
+                            <input type="text" name="price" class="form-control" id="price"
+                                   placeholder="Цена" required>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <input type="submit" class="btn btn-lg btn-block btn-outline-primary" value="Сохранить"/>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+</div>

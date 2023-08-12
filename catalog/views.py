@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core import management
 from catalog.models import Contact, Product
 from datetime import datetime
+from django.views.generic import DetailView
 
 
 # Create your views here.
@@ -27,6 +28,12 @@ def contact(request):
     return render(request, 'main/contact.html', context=context)
 
 
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'main/product_details.html'
+    context_object_name = 'article'
+
+
 def product(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -37,5 +44,6 @@ def product(request):
                                create_date=datetime.now(), date_of_change=datetime.now())
 
     product_list = Product.objects.all()
-    contex = {'object_list': product_list}
+    contex = {'object_list': product_list,
+              'object_img': '23052.jpg'}
     return render(request, 'main/product.html', context=contex)

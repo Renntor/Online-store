@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.core import management
 from catalog.models import Contact, Product
-from datetime import datetime
 from django.views.generic import DetailView, ListView, CreateView
 from django.urls import reverse_lazy
 

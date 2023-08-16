@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'catalog',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -78,11 +79,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('NAME_PSQL'),
-        'USER': os.environ.get('USERNAME_PSQL'),
+        'NAME': 'django',
+        'USER': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': 5432,
-        'PASSWORD': os.environ.get('PASSWORD_PSQL')
+        'PASSWORD': '1234'
     }
 }
 

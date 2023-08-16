@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from blog.models import Blog
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from pytils.translit import slugify
 
@@ -33,6 +34,12 @@ class BlogDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.count_views += 1
         self.object.save()
+        if self.object.count_views == 100:
+            subject = 'Условие выполнено'
+            message = 'Условие было выполнено.'
+            from_email = 'EMAIL'
+            recipient_list = ['EMAIL']  # Укажите адрес получателя
+            send_mail(subject, message, from_email, recipient_list)
         return self.object
 
 
@@ -47,3 +54,4 @@ class BlogUpdateView(UpdateView):
 class BlogDeleteView(DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:blog')
+

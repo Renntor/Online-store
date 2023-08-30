@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 # Create your models here.
 
 NULLABLE = {'null': True, 'blank': True}
@@ -25,6 +27,7 @@ class Product(models.Model):
     Модель продуктов
     """
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец', **NULLABLE)
 
     name = models.CharField(max_length=100, verbose_name='название')
     description = models.TextField(verbose_name='описание')

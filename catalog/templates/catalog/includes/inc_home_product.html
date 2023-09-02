@@ -1,6 +1,7 @@
 {% load my_tags %}
 <div class="container">
     <div class="row text-center">
+<!--        {% if user.is_authenticated %}-->
         {% for object in object_list %}
         <div class="col-4">
             <div class="card mb-4 box-shadow">
@@ -13,7 +14,11 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li><h5>{{ object.description|truncatechars:100 }}</h5></li>
                     </ul>
-                    <p class="text" align="right">Актуальная версия: {{ formset }}</p>
+                    {% for version in object.version_set.all %}
+                    {% if version.current_version %}
+                    <p class="text" align="right">Актуальная версия: {{ version.number_version }}</p>
+                    {% endif %}
+                    {% endfor %}
                     <div class="btn-group">
                         <button type="button" class="btn btn-block btn-outline-primary">Купить</button>
                         <a href="{% url 'catalog:product_details' object.id%}"
@@ -26,5 +31,6 @@
         </div>
 
         {% endfor %}
+<!--        {% endif %}-->
     </div>
 </div>

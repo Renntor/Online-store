@@ -36,11 +36,9 @@ class ProductListView(ListView):
     model = Product
     template_name = 'catalog/home.html'
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     version = Version.objects.filter(current_version=True)[0]
-    #     context['version'] = version.number_version
-    #     return context
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -84,7 +82,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
-
 
         return super().form_valid(form)
 

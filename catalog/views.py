@@ -26,7 +26,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     """
     model = Product
     context_object_name = 'article'
-    raise_exception = True
+
 
 
 class ProductListView(ListView):
@@ -48,7 +48,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
-    raise_exception = True
 
     def form_valid(self, form):
         if form.is_valid():
@@ -62,7 +61,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
-    raise_exception = True
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -89,4 +88,4 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
-    raise_exception = True
+

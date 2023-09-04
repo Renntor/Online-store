@@ -4,5 +4,17 @@
     <h1 class="display-4 text-primary">Online-store</h1>
 </div>
 {% include 'catalog/includes/inc_home_product.html'%}
+{% if user.is_authenticated %}
+<div class="col-12">
+    <p>
+    <div class="text-center">
+    <div class="btn-group">
+        <a href="{% url 'catalog:create_product' %}" class="btn btn-block btn-outline-dark">Добавить продукт</a>
+    <a href='#' class="btn btn-block btn-outline-dark">Добавить категорию</a>
+    </div>
+</div>
+    </p>
+    {% endif %}
+</div>
 
 {% endblock %}

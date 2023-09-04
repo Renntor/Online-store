@@ -24,8 +24,8 @@
 
     <!-- Button trigger modal -->
     <div class="btn-group">
-        <a href="{% url 'catalog:delete_product' object.id %}" class="btn btn-warning">Удалить продукт</a>
-            <a href="{% url 'catalog:home' %}" class="btn btn-primary">Назад</a>
+        <a href="{% url 'catalog:delete_product' object.id %}" class="btn btn-outline-dark">Удалить продукт</a>
+            <a href="{% url 'catalog:home' %}" class="btn btn-outline-dark">Назад</a>
     </div>
 
     {% endblock %}

@@ -1,12 +1,11 @@
-from django.shortcuts import render
-from django.core import management
-
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Contact, Product, Version
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from catalog.services import get_cached_category
 
 
 # Create your views here.
@@ -28,17 +27,12 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'article'
 
 
-
 class ProductListView(ListView):
     """
     Контролер для показа продуктов
     """
     model = Product
     template_name = 'catalog/home.html'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -55,6 +49,11 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
             product.owner = self.request.user
             product.save()
         return super().form_valid(form)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['category'] = get_cached_category()
+        return context_data
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):

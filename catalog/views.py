@@ -1,22 +1,41 @@
-import os
 from django.shortcuts import render
-
-from catalog.models import Contact
+from django.core import management
+from catalog.models import Contact, Product
+from datetime import datetime
 
 
 # Create your views here.
 
 
 def home(request):
-    os.system('python3 manage.py last_five')
-    contacts = Contact.objects.all()[0]
-    return render(request, 'main/home.html', {'contats': contacts})
+    product_list = Product.objects.all()
+    contex = {'object_list': product_list,
+              'object_img': '23052.jpg'}
+    management.call_command('last_five')
+    return render(request, 'main/home.html', context=contex)
 
 
 def contact(request):
+    contact_list = Contact.objects.all()
+    context = {'object_list': contact_list}
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
         print(name, phone, message)
-    return render(request, 'main/contact.html')
+
+    return render(request, 'main/contact.html', context=context)
+
+
+def product(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        category = request.POST.get('category')
+        price = request.POST.get('price')
+        Product.objects.create(name=name, description=description, category=category, price=price,
+                               create_date=datetime.now(), date_of_change=datetime.now())
+
+    product_list = Product.objects.all()
+    contex = {'object_list': product_list}
+    return render(request, 'main/product.html', context=contex)

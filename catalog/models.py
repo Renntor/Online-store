@@ -2,15 +2,15 @@ from django.db import models
 
 # Create your models here.
 
-NULLABLE = {'null': True, 'blank':True}
+NULLABLE = {'null': True, 'blank': True}
+
 
 class Product(models.Model):
-
     name = models.CharField(max_length=100, verbose_name='название')
     description = models.TextField(verbose_name='описание')
     preview = models.ImageField(verbose_name='превью', **NULLABLE)
     category = models.CharField(max_length=50, verbose_name='категория')
-    price = models.IntegerField(verbose_name='цена')
+    price = models.PositiveIntegerField(verbose_name='цена')
     create_date = models.DateField(verbose_name='дата создания')
     date_of_change = models.DateField(verbose_name='дата изменения')
 
@@ -24,7 +24,6 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=50, verbose_name='название')
     description = models.TextField(verbose_name='описание')
 
@@ -37,7 +36,6 @@ class Category(models.Model):
 
 
 class Contact(models.Model):
-
     country = models.CharField(max_length=50, verbose_name='страна')
     address = models.TextField(verbose_name='адрес')
 

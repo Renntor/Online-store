@@ -1,9 +1,17 @@
+import os
 from django.shortcuts import render
+
+from catalog.models import Contact
+
 
 # Create your views here.
 
+
 def home(request):
-    return render(request, 'main/home.html')
+    os.system('python3 manage.py last_five')
+    contacts = Contact.objects.all()[0]
+    return render(request, 'main/home.html', {'contats': contacts})
+
 
 def contact(request):
     if request.method == 'POST':

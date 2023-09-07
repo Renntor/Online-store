@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html'%}
+{% block content %}
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ article.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title ">Цена:
+                        <p>$ {{article.price}}</p></h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- {{ article.description }}</li>
+                        <li>- Дата создания: {{ article.create_date}}</li>
+                        <li>- Дата изменение: {{ article.date_of_change}}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <div class="m-3">
+        <a href="{% url 'catalog:home' %}" class="btn btn-primary">Назад</a>
+    </div>
+
+
+    {% endblock %}
+</div>

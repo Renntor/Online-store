@@ -366,6 +366,16 @@ files = [
 plugins = ["importlib-metadata"]
 
 [[package]]
+name = "pytils"
+version = "0.4.1"
+description = "Russian-specific string utils"
+optional = false
+python-versions = "^3.7"
+files = [
+    {file = "pytils-0.4.1.tar.gz", hash = "sha256:aa109b1bc0ec4bdb7c9768520110348d8aeb0706600e6cf641272e6850e26eab"},
+]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -462,4 +472,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bc869b3c7ccca50a4fad2079bb98c229d130ad1bbbe0167d9f9f006e6238a78c"
+content-hash = "82221ee8f536adc784c264b5df4051ec247762d5db16cace6e6e61dc239a3c0e"

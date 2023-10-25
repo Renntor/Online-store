@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from blog.models import Blog
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
@@ -43,9 +44,10 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(PermissionRequiredMixin, UpdateView):
     model = Blog
     fields = ('title', 'context', 'preview')
+    permission_required = 'blog.change_post'
 
     def get_success_url(self):
         return reverse_lazy('blog:view', kwargs={'pk': self.object.pk})

@@ -1,7 +1,6 @@
 {% load my_tags %}
 <div class="container">
     <div class="row text-center">
-<!--        {% if user.is_authenticated %}-->
         {% for object in object_list %}
         <div class="col-4">
             <div class="card mb-4 box-shadow">
@@ -20,17 +19,16 @@
                     {% endif %}
                     {% endfor %}
                     <div class="btn-group">
-                        <button type="button" class="btn btn-block btn-outline-primary">Купить</button>
+                        <button type="button" class="btn btn-block btn-outline-dark">Купить</button>
                         <a href="{% url 'catalog:product_details' object.id%}"
-                           class="btn btn-block btn-outline-primary">Детали</a>
+                           class="btn btn-block btn-outline-dark">Детали</a>
                         <a href="{% url 'catalog:update_product' object.id %}"
-                           class="btn btn-block btn-outline-primary">Изменить продукт</a>
+                           class="btn btn-block btn-outline-dark">Изменить продукт</a>
                     </div>
                 </div>
             </div>
         </div>
 
         {% endfor %}
-<!--        {% endif %}-->
     </div>
 </div>

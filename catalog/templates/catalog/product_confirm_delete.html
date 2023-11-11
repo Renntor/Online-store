@@ -10,8 +10,8 @@
                         {% csrf_token %}
                         <p>Удалить продукт {{object.name}}?</p>
                         <div class="btn-group">
-                        <button type="submit" class="btn btn-block btn-outline-danger">Да</button>
-                        <a href="{% url 'catalog:home' %}" type="button" class="btn btn-block btn-outline-success ">Отмена</a>
+                        <button type="submit" class="btn-outline-dark">Да</button>
+                        <a href="{% url 'catalog:home' %}" type="button" class="btn-outline-dark ">Отмена</a>
                         </div>
                     </form>
                 </div>

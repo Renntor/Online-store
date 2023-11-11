@@ -3,7 +3,7 @@ from catalog.models import Contact, Product, Version
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 
 from catalog.services import get_cached_category
 
@@ -56,11 +56,11 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return context_data
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
-
+    permission_required = 'catalog.change_post'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -71,6 +71,10 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             formset = VersionFormset(instance=self.object)
         context['formset'] = formset
         return context
+
+    def test_func(self):
+        return self.request.user == self.object.owner
+
 
     def form_valid(self, form):
         context_data = self.get_context_data()

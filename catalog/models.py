@@ -35,6 +35,7 @@ class Product(models.Model):
     price = models.PositiveIntegerField(verbose_name='цена')
     create_date = models.DateField(verbose_name='дата создания', auto_now=True)
     date_of_change = models.DateField(verbose_name='дата изменения', auto_now_add=True)
+    publish = models.BooleanField(default=False, verbose_name='публикация')
 
     def __str__(self):
         return (f'{self.name} {self.description} {self.preview} \
